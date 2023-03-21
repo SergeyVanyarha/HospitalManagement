@@ -19,6 +19,7 @@ class HospitalPatient(models.Model):
     age = fields.Integer(
         string='Age',
         compute='compute_age',
+        store=True
     )
 
     birth_date = fields.Date(
