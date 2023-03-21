@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="main_hospital_menu"
+              name="Hospital Management"
+              sequence="90"
+              web_icon="ub_hospital,static/description/icon.png"/>
+
+    <menuitem id="visit_menu"
+              name="Visits"
+              parent="main_hospital_menu"
+              action="ub_hospital.hospital_patient_visit_action_window"
+              sequence="100"/>
+
+    <menuitem id="patient_menu"
+              name="Patients"
+              parent="main_hospital_menu"
+              action="ub_hospital.hospital_patient_action_window"
+              sequence="200"/>
+
+    <menuitem id="doctor_menu"
+              name="Doctors"
+              parent="main_hospital_menu"
+              action="ub_hospital.hospital_doctor_action_window"
+              sequence="300"/>
+
+    <menuitem id="report_menu"
+              name="Reports"
+              parent="main_hospital_menu"
+              sequence="900"/>
+
+    <menuitem id="hospital_visit_report"
+                name="Hospital Visit Report"
+                parent="report_menu"
+                action="ub_hospital.action_view_hospital_visit_report_export"
+                sequence="100"/>
+
+    <menuitem id="calendar_visit_report"
+                name="Calendar Visit Report"
+                parent="report_menu"
+                action="ub_hospital.hospital_patient_visit_action_window_calendar"
+                sequence="200"/>
+
+    <menuitem id="pivot_visit_report"
+                name="Pivot Visit Report"
+                parent="report_menu"
+                action="ub_hospital.hospital_patient_visit_action_window_pivot"
+                sequence="300"/>
+
+    <menuitem id="configuration_menu"
+              name="Configuration"
+              parent="main_hospital_menu"
+              sequence="900"/>
+
+    <menuitem id="doctor_position_menu"
+              name="Doctor Positions"
+              parent="configuration_menu"
+              action="ub_hospital.hospital_doctor_position_action_window"
+              sequence="100"/>
+
+    <menuitem id="disease_menu"
+              name="Diseases"
+              parent="configuration_menu"
+              action="ub_hospital.hospital_disease_action_window"
+              sequence="200"/>
+
+
+
+</odoo>

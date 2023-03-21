@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_doctor_position_form_view" model="ir.ui.view">
+        <field name="name">hospital.doctor.position.form</field>
+        <field name="model">hospital.doctor.position</field>
+        <field name="arch" type="xml">
+            <form string="Doctor Position">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="notes"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Diseases">
+                            <field name="disease_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_doctor_position_tree_view" model="ir.ui.view">
+        <field name="name">hospital.doctor.position.tree</field>
+        <field name="model">hospital.doctor.position</field>
+        <field name="arch" type="xml">
+            <tree string="Doctor Positions">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_doctor_position_view_search" model="ir.ui.view">
+        <field name="name">hospital.doctor.position.search</field>
+        <field name="model">hospital.doctor.position</field>
+        <field name="arch" type="xml">
+            <search string="Doctor Position">
+                <field name="name" filter_domain="['|', ('name','ilike',self), ('code','ilike',self)]" string="Doctor Position"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="hospital_doctor_position_action_window" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Doctor Positions</field>
+        <field name="res_model">hospital.doctor.position</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

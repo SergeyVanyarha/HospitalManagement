@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_patient_visit_form_view" model="ir.ui.view">
+        <field name="name">hospital.patient.visit.form</field>
+        <field name="model">hospital.patient.visit</field>
+        <field name="arch" type="xml">
+            <form string="Hospital Visit">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="is_old" invisible="1"/>
+                            <field name="name"/>
+                            <field name="patient_id"/>
+                            <field name="doctor_id" attrs="{'readonly': [('is_old', '=', True)]}"/>
+                            <field name="visit_datetime" attrs="{'readonly': [('is_old', '=', True)]}"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="disease_ids" widget="many2many_tags"/>
+                            <field name="diagnosis"/>
+                            <field name="treatment"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_patient_visit_tree_view" model="ir.ui.view">
+        <field name="name">hospital.patient.visit.tree</field>
+        <field name="model">hospital.patient.visit</field>
+        <field name="arch" type="xml">
+            <tree string="Hospital Visits">
+                <field name="doctor_id" widget="many2one" optional="show"/>
+                <field name="patient_id" widget="many2one" optional="show"/>
+                <field name="name" optional="hide"/>
+                <field name="visit_datetime" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_patient_visit_view_search" model="ir.ui.view">
+        <field name="name">hospital.patient.visit.search</field>
+        <field name="model">hospital.patient.visit</field>
+        <field name="arch" type="xml">
+            <search string="Hospital Visit">
+                <field name="name" string="Visit"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="visit_datetime"/>
+                <filter string="Patients" name="patients" context="{'group_by': 'patient_id'}" />
+                <filter string="Doctors" name="doctors" context="{'group_by': 'doctor_id'}" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hospital_patient_visit_view_calendar">
+            <field name="model">hospital.patient.visit</field>
+            <field name="arch" type="xml">
+                <calendar string="Patient Visits" date_start="visit_datetime" date_stop="visit_datetime_end" date_delay="duration" color="doctor_id">
+                    <field name="is_old" invisible="1"/>
+                    <field name="patient_id" filters="1" />
+                    <field name="doctor_id" attrs="{'readonly': [('is_old', '=', True)]}" filters="1" />
+                    <field name="visit_datetime" attrs="{'readonly': [('is_old', '=', True)]}"/>
+                    <field name="duration"/>
+                    <field name="disease_ids" widget="many2many_tags"/>
+                </calendar>
+            </field>
+        </record>
+
+    <record id="hospital_patient_visit_report_view_pivot" model="ir.ui.view">
+            <field name="name">hospital.patient.visit.report.pivot</field>
+            <field name="model">hospital.patient.visit</field>
+            <field name="arch" type="xml">
+                <pivot string="Patient Visits" sample="1">
+                    <field name="visit_datetime" interval="day" type="row"/>
+                    <field name="patient_id" type="row"/>
+                    <field name="doctor_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+    <record id="hospital_patient_visit_action_window_calendar" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Hospital Visits Calendar</field>
+        <field name="res_model">hospital.patient.visit</field>
+        <field name="view_mode">calendar</field>
+    </record>
+
+    <record id="hospital_patient_visit_action_window_pivot" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Hospital Visits Pivot</field>
+        <field name="res_model">hospital.patient.visit</field>
+        <field name="view_mode">pivot</field>
+    </record>
+
+    <record id="hospital_patient_visit_action_window" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Hospital Visits</field>
+        <field name="res_model">hospital.patient.visit</field>
+        <field name="view_mode">tree,form,calendar,pivot</field>
+    </record>
+
+
+
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="hospital_doctor_position_therapist" model="hospital.doctor.position">
+            <field name="name">Therapist</field>
+        </record>
+    </data>
+</odoo>
